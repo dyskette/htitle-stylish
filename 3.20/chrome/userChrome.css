@@ -1,0 +1,109 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+  /* Space between top border and tabs */
+  .tabbrowser-tab,
+  .tabs-newtab-button,
+  .scrollbutton-up,
+  .scrollbutton-down,
+  #new-tab-button,
+  #alltabs-button {
+    margin-top: 15px !important;
+  }
+  
+  /* Make the menubar floating, so it doesn't affect the style */
+  #toolbar-menubar {
+    position: fixed;
+    z-index: 999;
+    top: 0px;
+    left: 0px;
+  }
+  #main-menubar {
+    background-color: white !important;
+    border-radius: 0px 0px 5px 5px !important;
+    margin-left: 5px !important;
+  }
+
+  /* Window controls size and position */
+  :-moz-any(#window-controls, .window-controls) > toolbarbutton {
+    /* I can't resize the button less than 34 pixels height */
+    width: 34px !important;
+    height: 34px !important;
+    margin-top: 4px !important;
+    margin-right: 6px !important;
+  }
+  
+  /* Background tabs and titlebar */
+  #navigator-toolbox {
+    background: -moz-linear-gradient(top, #f4f4f4 43px, #f1f1f1 44px, #dadad8 45px);
+  }
+
+  /* Active tab background */
+  #nav-bar {
+    background: -moz-linear-gradient(top, #e7e7e6 0%, #d0d0ce 100%) !important;
+  }
+  .tab-background > .tab-background-start[visuallyselected="true"]:not(:-moz-lwtheme)::before,
+  .tab-background > .tab-background-end[visuallyselected="true"]:not(:-moz-lwtheme)::before,
+  .tab-background > .tab-background-middle[visuallyselected="true"]:not(:-moz-lwtheme) {
+    background-image: url(chrome://browser/skin/tabbrowser/tab-active-middle.png),
+                      -moz-linear-gradient(top, #efefef 0%, #e7e7e6 100%) !important;
+  }
+  .tab-background > .tab-background-start[visuallyselected="true"]:not(:-moz-lwtheme)::before {
+    clip-path: url("chrome://browser/content/browser.xul#tab-curve-clip-path-start") !important;
+  }
+  .tab-background > .tab-background-end[visuallyselected="true"]:not(:-moz-lwtheme)::before {
+    clip-path: url("chrome://browser/content/browser.xul#tab-curve-clip-path-end") !important;
+  }
+
+  /* HTitle show/hide window controls*/
+  #window-controls[htitle="true"] > :-moz-any(#minimize-button, #restore-button) {
+    display: none !important;
+  }
+  #window-controls[htitle="true"][htitlebuttonlayout*="minimize"] > #minimize-button, /* HTitle 3+ */
+  #window-controls[htitle="true"][htitle-button-layout*="minimize"] > #minimize-button,
+  #window-controls[htitle="true"][htitlebuttonlayout*="maximize"] > #restore-button,
+  #window-controls[htitle="true"][htitle-button-layout*="maximize"] > #restore-button,
+  #window-controls[htitle="true"] > #close-button {
+    display: -moz-box !important;
+  }
+  #main-window[sizemode="fullscreen"] #window-controls[htitle="true"],
+  #main-window[sizemode="fullscreen"] #window-controls[htitle="true"] > #restore-button {
+    display: -moz-box !important;
+  }
+  #main-window[sizemode="fullscreen"] #window-controls[htitle="true"] > :-moz-any(#minimize-button, #close-button) {
+    display: none !important;
+  }
+  
+  /* HTitle icons */
+	#minimize-button {
+		list-style-image: url(assets/window-minimize.svg) !important;
+	}
+  #main-window[sizemode="normal"] #window-controls[htitle="true"] > #restore-button {
+		list-style-image: url(assets/window-maximize.svg) !important;
+	}
+	#main-window[sizemode="maximized"] #window-controls[htitle="true"] > #restore-button {
+		list-style-image: url(assets/window-restore.svg) !important;
+	}
+	#close-button {
+		list-style-image: url(assets/close.svg) !important;
+	}
+	:-moz-any(#restore-button, #fullscreen-leave-button) {
+		list-style-image: url(assets/view-fullscreen-leave.svg) !important;
+	}
+  
+  /* Round corners with resize bug */
+  #main-window[sizemode="normal"][htitlemode="always"] {
+    -moz-appearance: none !important;
+    background: transparent !important;
+    border-radius: 7px 7px 0px 0px;
+  }
+  #main-window[sizemode="normal"]:not(:-moz-lwtheme) > #tab-view-deck {
+    background: Window;
+  }
+  :-moz-any(
+  #main-window[htitlemode="always"],
+  #main-window:not([sizemode="normal"])[htitlemode="auto"],
+  #main-window:not([sizemode="normal"])[htitlemode="legacy"]
+  ) #toolbar-menubar:not(:-moz-lwtheme) { 
+    -moz-appearance: none;
+  }
+}
