@@ -1,57 +1,86 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
-  /* Space between top border and tabs */
-  .tabbrowser-tab,
-  .tabs-newtab-button,
-  .scrollbutton-up,
-  .scrollbutton-down,
-  #new-tab-button,
-  #alltabs-button {
+
+/* Enable rounded corners, uncomment this section to have resizing bugs :) */
+  /*
+  #main-window[sizemode="normal"][htitlemode="always"] {
+    -moz-appearance: none !important;
+    background: transparent !important;
+    border-radius: 7px 7px 0px 0px;
+  }
+
+  #main-window[sizemode="normal"]:not(:-moz-lwtheme) > #tab-view-deck {
+    background: Window;
+  }
+
+  :-moz-any(
+    #main-window[htitlemode="always"],
+    #main-window:not([sizemode="normal"])[htitlemode="auto"],
+    #main-window:not([sizemode="normal"])[htitlemode="legacy"]
+  ) #toolbar-menubar:not(:-moz-lwtheme) {
+    -moz-appearance: none;
+  }
+  */
+
+  /* Icons */
+  #minimize-button {
+    list-style-image: url("assets/window-minimize.svg") !important;
+  }
+  #main-window[sizemode="normal"] #window-controls[htitle="true"] > #restore-button {
+    list-style-image: url("assets/window-maximize.svg") !important;
+  }
+  #main-window[sizemode="maximized"] #window-controls[htitle="true"] > #restore-button {
+    list-style-image: url("assets/window-restore.svg") !important;
+  }
+  #close-button {
+    list-style-image: url("assets/close.svg") !important;
+  }
+  :-moz-any(#restore-button) {
+    list-style-image: url("assets/view-fullscreen-leave.svg") !important;
+  }
+  #TabsToolbar > :not(#window-controls) {
     margin-top: 15px !important;
   }
-  
-  /* Make the menubar floating, so it doesn't affect the style */
-  #toolbar-menubar {
-    position: fixed;
-    z-index: 999;
-    top: 0px;
-    left: 0px;
-  }
-  #main-menubar {
-    background-color: white !important;
-    border-radius: 0px 0px 5px 5px !important;
-    margin-left: 5px !important;
-  }
 
-  /* Window controls size and position */
-  :-moz-any(#window-controls, .window-controls) > toolbarbutton {
-    /* I can't resize the button less than 34 pixels height */
-    width: 34px !important;
-    height: 34px !important;
-    margin-top: 4px !important;
-    margin-right: 6px !important;
+  /* Button */
+  :-moz-any(#window-controls) > toolbarbutton {
+    -moz-appearance: none !important;
+    width: 34px;
+    height: 34px;
+    margin: 4px 6px 8px 0px !important;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: ButtonText;
+    text-shadow: none;
+    transition-property: background, border, box-shadow;
+    transition-duration: 200ms, 200ms, 0ms;
   }
-  
-  /* Background tabs and titlebar */
-  #navigator-toolbox {
-    background: -moz-linear-gradient(top, #f4f4f4 43px, #f1f1f1 44px, #dadad8 45px);
+  /* :hover */
+  :-moz-any(#window-controls) > toolbarbutton:hover {
+    background-image: linear-gradient(rgb(247,247,247),rgb(232,232,231) 60%,rgb(222,222,221));
+    border-color: #9d9d99;
+    box-shadow: 0 1px rgb(255,255,255) inset;
+    text-shadow: 0 1px rgba(255,255,255,.77);
   }
-
-  /* Active tab background */
-  #nav-bar {
-    background: -moz-linear-gradient(top, #e7e7e6 0%, #d0d0ce 100%) !important;
+  :-moz-any(#window-controls) > toolbarbutton:hover:-moz-lwtheme {
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0.8) 40%, rgba(220,220,220,0.5));
+    border-color: rgba(50,50,50,.4);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.3),
+                0 1px 0 rgba(255,255,255,.15),;
   }
-  .tab-background > .tab-background-start[visuallyselected="true"]:not(:-moz-lwtheme)::before,
-  .tab-background > .tab-background-end[visuallyselected="true"]:not(:-moz-lwtheme)::before,
-  .tab-background > .tab-background-middle[visuallyselected="true"]:not(:-moz-lwtheme) {
-    background-image: url(chrome://browser/skin/tabbrowser/tab-active-middle.png),
-                      -moz-linear-gradient(top, #efefef 0%, #e7e7e6 100%) !important;
+  /* active */
+  :-moz-any(#window-controls) > toolbarbutton:active:hover {
+    background-image: linear-gradient(rgb(200,200,197),rgb(220,220,218));
+    border-color: #9d9d99;
+    box-shadow: 0 2px 1px -2px rgba(0,0,0,0) inset;
+    text-shadow: 0 1px rgba(255,255,255,.77);
   }
-  .tab-background > .tab-background-start[visuallyselected="true"]:not(:-moz-lwtheme)::before {
-    clip-path: url("chrome://browser/content/browser.xul#tab-curve-clip-path-start") !important;
-  }
-  .tab-background > .tab-background-end[visuallyselected="true"]:not(:-moz-lwtheme)::before {
-    clip-path: url("chrome://browser/content/browser.xul#tab-curve-clip-path-end") !important;
+  :-moz-any(#window-controls) > toolbarbutton:active:hover:-moz-lwtheme {
+    background-image: linear-gradient(to bottom, rgba(169,172,169,0.5), rgba(174,177,174,0.5) 20%, rgba(174,177,174,0.5));
+    border-color: rgba(180,180,180,1);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.08),
+                0 1px 0 rgba(255,255,255,0.15);
   }
 
   /* HTitle show/hide window controls*/
@@ -73,37 +102,28 @@
     display: none !important;
   }
   
-  /* HTitle icons */
-	#minimize-button {
-		list-style-image: url(assets/window-minimize.svg) !important;
-	}
-  #main-window[sizemode="normal"] #window-controls[htitle="true"] > #restore-button {
-		list-style-image: url(assets/window-maximize.svg) !important;
-	}
-	#main-window[sizemode="maximized"] #window-controls[htitle="true"] > #restore-button {
-		list-style-image: url(assets/window-restore.svg) !important;
-	}
-	#close-button {
-		list-style-image: url(assets/close.svg) !important;
-	}
-	:-moz-any(#restore-button, #fullscreen-leave-button) {
-		list-style-image: url(assets/view-fullscreen-leave.svg) !important;
-	}
-  
-  /* Round corners with resize bug */
-  #main-window[sizemode="normal"][htitlemode="always"] {
+  /* Background "titlebar" */
+  #navigator-toolbox > #TabsToolbar {
     -moz-appearance: none !important;
-    background: transparent !important;
-    border-radius: 7px 7px 0px 0px;
+    background: rgb(244, 244, 244) linear-gradient(to top, rgb(212,212,210), rgb(239,239,239) 2px, rgb(244,244,244) 3px);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.8);
+    background-size: auto 46px;
   }
-  #main-window[sizemode="normal"]:not(:-moz-lwtheme) > #tab-view-deck {
-    background: Window;
+
+  /* Active tab background */
+  .tab-background > .tab-background-start[visuallyselected="true"]:not(:-moz-lwtheme)::before,
+  .tab-background > .tab-background-end[visuallyselected="true"]:not(:-moz-lwtheme)::before,
+  .tab-background > .tab-background-middle[visuallyselected="true"]:not(:-moz-lwtheme) {
+    background-image: url("chrome://browser/skin/tabbrowser/tab-active-middle.png"),
+      -moz-linear-gradient(to bottom, rgb(239, 239, 239), rgb(231, 231, 230) 100%) !important;
   }
-  :-moz-any(
-  #main-window[htitlemode="always"],
-  #main-window:not([sizemode="normal"])[htitlemode="auto"],
-  #main-window:not([sizemode="normal"])[htitlemode="legacy"]
-  ) #toolbar-menubar:not(:-moz-lwtheme) { 
-    -moz-appearance: none;
+  .tab-background > .tab-background-start[visuallyselected="true"]:not(:-moz-lwtheme)::before {
+    clip-path: url("chrome://browser/content/browser.xul#tab-curve-clip-path-start") !important;
+  }
+  .tab-background > .tab-background-end[visuallyselected="true"]:not(:-moz-lwtheme)::before {
+    clip-path: url("chrome://browser/content/browser.xul#tab-curve-clip-path-end") !important;
+  }
+  #nav-bar {
+    background: -moz-linear-gradient(to bottom, rgb(231, 231, 230), rgb(208, 208, 206) 100%) !important;
   }
 }
