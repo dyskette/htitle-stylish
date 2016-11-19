@@ -1,7 +1,8 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-/* Enable rounded corners, uncomment this section to have resizing bugs :) */
+  /* Enable rounded corners, uncomment this section to have resizing bugs :) */
+  /* Warning: Unconfirmed random crashes */
   /*
   #main-window[sizemode="normal"][htitlemode="always"] {
     -moz-appearance: none !important;
@@ -38,6 +39,24 @@
   :-moz-any(#restore-button) {
     list-style-image: url("assets/view-fullscreen-leave.svg") !important;
   }
+
+  /* Window controls */
+  :-moz-any(#window-controls) {
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)) no-repeat;
+    background-size: 1px 100%, 1px 100%;
+    background-position: 0 0, 1px 0;
+    overflow: hidden;
+    margin: -1px 3px !important;
+    margin-inline-start: 3px !important;
+    padding: 1px 0;
+    padding-inline-start: 7px;
+  }
+  #TabsToolbar > :-moz-any(#window-controls) {
+    margin: 3px 6px 7px !important;
+    margin-inline-start: 6px !important;
+  }
+
+  /* Everything else should remain the same size */
   #TabsToolbar > :not(#window-controls) {
     margin-top: 15px !important;
   }
@@ -45,16 +64,20 @@
   /* Button */
   :-moz-any(#window-controls) > toolbarbutton {
     -moz-appearance: none !important;
-    width: 34px;
-    height: 34px;
-    margin: 4px 6px 8px 0px !important;
     background: transparent;
+    height: 34px !important;
+    width: 34px !important;
+    margin: 0px !important;
+    position: relative;
     border: 1px solid transparent;
     border-radius: 3px;
     color: ButtonText;
     text-shadow: none;
     transition-property: background, border, box-shadow;
     transition-duration: 200ms, 200ms, 0ms;
+  }
+  #main-window:not([sizemode="fullscreen"]) #window-controls[htitle="true"] > #restore-button {
+    margin: 0 6px 0 6px !important;
   }
   /* :hover */
   :-moz-any(#window-controls) > toolbarbutton:hover {

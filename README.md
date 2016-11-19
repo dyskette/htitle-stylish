@@ -4,7 +4,7 @@ Change firefox's appearance to partially match GNOME.
 
 ## Screenshot
 
-![Screenshot 2016-06](https://cloud.githubusercontent.com/assets/6687927/16358585/c79d864c-3adc-11e6-8147-eb27142a09f5.png)
+![Screenshot 2016-06](https://cloud.githubusercontent.com/assets/6687927/20458944/ef09e0f4-ae77-11e6-87d5-795ff15cf444.png)
 
 ## Requirements
 
