@@ -126,7 +126,7 @@
   }
   
   /* Background "titlebar" */
-  #navigator-toolbox > #TabsToolbar {
+  #navigator-toolbox > #TabsToolbar:not(:-moz-lwtheme) {
     -moz-appearance: none !important;
     background: rgb(244, 244, 244) linear-gradient(to top, rgb(212,212,210), rgb(239,239,239) 2px, rgb(244,244,244) 3px);
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.8);
@@ -146,7 +146,7 @@
   .tab-background > .tab-background-end[visuallyselected="true"]:not(:-moz-lwtheme)::before {
     clip-path: url("chrome://browser/content/browser.xul#tab-curve-clip-path-end") !important;
   }
-  #nav-bar {
+  #nav-bar:not(:-moz-lwtheme) {
     background: -moz-linear-gradient(to bottom, rgb(231, 231, 230), rgb(208, 208, 206) 100%) !important;
   }
 }
